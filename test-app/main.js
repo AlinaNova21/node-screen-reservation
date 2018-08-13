@@ -13,7 +13,7 @@ function createWindow () {
   win = new BrowserWindow({
     width: 800, 
     height: 32,
-    type: 'dock',
+    type: process.platform === 'win32' ? 'toolbar' : 'dock',
     frame: false
   })
   win.loadURL(`file://${__dirname}/index.html`)
