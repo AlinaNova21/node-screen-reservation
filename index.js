@@ -82,6 +82,7 @@ class ScreenReserve {
 }
 
 function spawnJSON(cmd, args, opts) {
+    cmd = cmd.replace("app.asar", "app.asar.unpacked")
     const child = child_process.spawnSync(cmd, args, opts)
     let output = child.stdout.toString()
     console.log(output)
