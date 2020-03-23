@@ -41,10 +41,12 @@ class ScreenReserve {
     if (process.platform === 'linux') {
         let keys = ['left', 'right', 'top', 'bottom', 'left_start_y', 'left_end_y', 'right_start_y', 'right_end_y', 'top_start_x', 'top_end_x', 'bottom_start_x','bottom_end_x']
         keys.forEach(k=>opts[k] = opts[k] || 0)
-        let val = keys.map(k=>opts[k] || 0).join(',')
+        let val1 = keys.map(k=>opts[k] || 0).join(',')
+        let val2 = keys.map(k=>opts[k] || 0).slice(0,4).join(',')
         console.log('xprop keys',keys.join(','))
-        console.log('xprop vals',val)
-        let child = child_process.spawn('xprop',['-id',opts.wid,'-f','_NET_WM_STRUT_PARTIAL','32c','-set','_NET_WM_STRUT_PARTIAL',val])
+        console.log('xprop vals',val1)
+        let child1 = child_process.spawn('xprop',['-id',opts.wid,'-f','_NET_WM_STRUT_PARTIAL','32c','-set','_NET_WM_STRUT_PARTIAL',val1])
+        let child2 = child_process.spawn('xprop',['-id',opts.wid,'-f','_NET_WM_STRUT','32c','-set','_NET_WM_STRUT',val2])
     }
     if (process.platform === 'win32') {
         const cmd = (cmd) => {
